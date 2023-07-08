@@ -1,8 +1,9 @@
-import numpy as np
+# import numpy as np
 from config.core import config
 from pipeline import credit_risk_pipeline
 from processing.data_manager import load_dataset, save_pipeline
 from sklearn.model_selection import train_test_split
+
 
 def run_training() -> None:
     """train the model."""

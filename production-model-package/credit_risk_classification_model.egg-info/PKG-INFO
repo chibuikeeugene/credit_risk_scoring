@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: credit-risk-classification-model
+Version: 3.0.0
+Summary: classification model package from Train In Data.
+Home-page: https://github.com/chibuikeeugene/credit_risk_scoring
+Author: Eugene
+Author-email: chibuikeeugene@gmail.com
+License: BSD-3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Requires-Python: >=3.9.0
+Description-Content-Type: text/markdown
+
+classification model package from Train In Data.

@@ -6,6 +6,7 @@ from pydantic import BaseModel, ValidationError
 
 from classification_model.config.core import config
 
+
 def drop_na_inputs(*, input_data: pd.DataFrame) -> pd.DataFrame:
     """check model inputs for na values and filter."""
     validated_data = input_data.copy()
@@ -37,21 +38,23 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
 
     return validated_data, errors
 
+
 class CustomerDataInputSchema(BaseModel):
     Status: Optional[int]
     Seniority: Optional[int]
-    Home: Optional[int]     
-    Time: Optional[int]     
-    Age: Optional[int]     
-    Marital: Optional[int]  
-    Records: Optional[int] 
-    Job: Optional[int]      
-    Expenses: Optional[int] 
-    Income: Optional[int]  
-    Assets: Optional[int]  
-    Debt: Optional[int]    
-    Amount: Optional[int]  
-    Price: Optional[int]   
+    Home: Optional[int]
+    Time: Optional[int]
+    Age: Optional[int]
+    Marital: Optional[int]
+    Records: Optional[int]
+    Job: Optional[int]
+    Expenses: Optional[int]
+    Income: Optional[int]
+    Assets: Optional[int]
+    Debt: Optional[int]
+    Amount: Optional[int]
+    Price: Optional[int]
+
 
 class MultipleCustomerDataInputs(BaseModel):
     inputs: List[CustomerDataInputSchema]

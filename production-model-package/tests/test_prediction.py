@@ -1,4 +1,4 @@
-import math
+# import math
 
 import numpy as np
 
@@ -19,3 +19,4 @@ def test_make_prediction(sample_input_data):
     assert isinstance(predictions[0], np.int)
     assert result.get("errors") is None
     assert len(predictions) == expected_no_of_prediction
+    assert predictions[0] == expected_first_prediction_value
