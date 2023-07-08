@@ -1,0 +1,127 @@
+# package overview
+package_name: classification_model
+
+# Data files
+training_data_file: train.csv
+test_data_file: test.csv
+
+# variables
+#the variable we are attempting to predict (status)
+target: status
+
+pipeline_name: classification_model
+pipeline_save_file: classification_model_output_v
+
+# selected variables
+features:
+  - amount
+  - assets
+  - fin_ratio
+  - home=owner
+  - income
+  - job=fixed
+  - job=partime
+  - records=no_rec
+  - records=yes_rec
+  - sav_pot_index
+  - seniority
+
+# newly engineered variables after our dictvectorizer transformation
+engineered_vars: 
+  - age
+  - amount
+  - assets
+  - assets_na
+  - debt
+  - debt_na
+  - expenses
+  - fin_ratio
+  - home=ignore
+  - home=other
+  - home=owner
+  - home=parents
+  - home=priv
+  - home=rent
+  - home=unknown
+  - income
+  - income_na
+  - job=fixed
+  - job=freelance
+  - job=others
+  - job=partime
+  - job=unknown
+  - marital=divorced
+  - marital=married
+  - marital=separated
+  - marital=single
+  - marital=unknown
+  - marital=widow
+  - price
+  - records=no_rec
+  - records=yes_rec
+  - sav_pot_index
+  - sav_pot_index_na
+  - seniority
+  - time
+
+# set the train-test split
+test_size: 0.3
+
+# set the random seed
+random_state: 1
+
+# set the number of estimators
+n_estimators:  100
+
+# maximum tree depth
+max_depth: 5
+
+# log transformer constant
+C: 1
+
+# numerical variable with NA in train set
+numerical_vars_with_na:
+  - income 
+  - assets 
+  - debt 
+  - sav_pot_index
+
+# numerical variables to be transformed logarithimically
+numerical_log_vars:
+  - price 
+  - amount
+  - income
+  - assets 
+  - debt
+
+# numerical variables to be transformed via yeojohnson
+numerical_yeo_vars: 
+  - seniority
+  - fin_ratio
+
+# variables not useful for our model
+dropped_vars:
+  - age
+  - assets_na
+  - debt
+  - debt_na
+  - expenses
+  - home=ignore 
+  - home=other
+  - home=parents 
+  - home=priv
+  - home=rent
+  - home=unknown
+  - income_na
+  - job=freelance
+  - job=others
+  - job=unknown
+  - marital=divorced
+  - marital=unknown
+  - marital=married
+  - marital=separated
+  - marital=single
+  - marital=widow
+  - price
+  - sav_pot_index_na
+  - time
