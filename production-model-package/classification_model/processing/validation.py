@@ -40,7 +40,6 @@ def validate_inputs(*, input_data: pd.DataFrame) -> Tuple[pd.DataFrame, Optional
 
 
 class CustomerDataInputSchema(BaseModel):
-    Status: Optional[int]
     Seniority: Optional[int]
     Home: Optional[int]
     Time: Optional[int]

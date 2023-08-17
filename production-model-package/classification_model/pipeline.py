@@ -36,6 +36,10 @@ credit_risk_pipeline = Pipeline(
             "yeojohnson",
             YeoJohnsonTransformer(variables=config.model_config.numerical_yeo_vars),
         ),
+        (
+            "new_variable_creation",
+            f.VariableTransformer(variables=config.model_config.var_creators)
+        ),
         # ========== FEATURE EXTRACTION ========= #
         (
             "feature_extraction",

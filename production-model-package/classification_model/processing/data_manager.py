@@ -61,14 +61,6 @@ def load_dataset(*, file_name: str) -> pd.DataFrame:
     # let's change the status value from string data type to int.
     df.status = (df.status == "good").astype(int)
 
-    # compute two additional features significant for our modeling
-    df["fin_ratio"] = (df["amount"] / df["price"]).round(2)
-
-    df["sav_pot_index"] = (
-        (df["income"] - df["expenses"] - (df["debt"] / 100))
-        / (df["amount"] / df["time"])
-    ).round(2)
-
     return df
 
 

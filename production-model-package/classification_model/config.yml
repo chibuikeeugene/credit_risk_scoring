@@ -12,19 +12,31 @@ target: status
 pipeline_name: classification_model
 pipeline_save_file: classification_model_output_v
 
-# selected variables
-features:
+
+# selected features 
+features:     
+  - seniority  
+  - home       
+  - time       
+  - age        
+  - marital    
+  - records    
+  - job        
+  - expenses   
+  - income     
+  - assets     
+  - debt       
+  - amount     
+  - price
+
+# variable creator
+var_creators:
+  - price   
+  - income     
+  - expenses     
+  - debt       
   - amount
-  - assets
-  - fin_ratio
-  - home=owner
-  - income
-  - job=fixed
-  - job=partime
-  - records=no_rec
-  - records=yes_rec
-  - sav_pot_index
-  - seniority
+  - time  
 
 # newly engineered variables after our dictvectorizer transformation
 engineered_vars: 

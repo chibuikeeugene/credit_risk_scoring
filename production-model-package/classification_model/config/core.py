@@ -32,6 +32,7 @@ class ModelConfig(BaseModel):
     random_state: int
     n_estimators: int
     max_depth: int
+    var_creators: List[str]
     C: int
     numerical_vars_with_na: List[str]
     numerical_log_vars: List[str]
