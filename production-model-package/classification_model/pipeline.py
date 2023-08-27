@@ -1,4 +1,5 @@
 # import our custom transformer
+from feature_engine.encoding import OrdinalEncoder
 from feature_engine.imputation import AddMissingIndicator, MeanMedianImputer
 from feature_engine.selection import DropFeatures
 from feature_engine.transformation import LogCpTransformer, YeoJohnsonTransformer
@@ -6,9 +7,9 @@ from feature_engine.transformation import LogCpTransformer, YeoJohnsonTransforme
 # Using our final estimator to build our model
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 from classification_model.config.core import config
-from classification_model.processing import feature as f
 
 credit_risk_pipeline = Pipeline(
     [
@@ -36,19 +37,22 @@ credit_risk_pipeline = Pipeline(
             "yeojohnson",
             YeoJohnsonTransformer(variables=config.model_config.numerical_yeo_vars),
         ),
+        # ===== CATEGORICAL ENCODER ========= #
         (
-            "new_variable_creation",
-            f.VariableTransformer(variables=config.model_config.var_creators)
-        ),
-        # ========== FEATURE EXTRACTION ========= #
-        (
-            "feature_extraction",
-            f.DictVect(variables=config.model_config.engineered_vars),
+            "category_encoding",
+            OrdinalEncoder(
+                encoding_method="ordered",
+                variables=config.model_config.categorical_vars,
+            ),
         ),
         # ========== SELECTION OF FEATURES SUITABLE FOR MODEL TRAINING ======= #
         (
             "dropped_features",
             DropFeatures(features_to_drop=config.model_config.dropped_vars),
+        ),
+        (
+            "data_scaling",
+            StandardScaler(),
         ),
         # ======= final estimator ==========#
         (

@@ -30,51 +30,11 @@ features:
   - price
 
 # variable creator
-var_creators:
-  - price   
-  - income     
-  - expenses     
-  - debt       
-  - amount
-  - time  
-
-# newly engineered variables after our dictvectorizer transformation
-engineered_vars: 
-  - age
-  - amount
-  - assets
-  - assets_na
-  - debt
-  - debt_na
-  - expenses
-  - fin_ratio
-  - home=ignore
-  - home=other
-  - home=owner
-  - home=parents
-  - home=priv
-  - home=rent
-  - home=unknown
-  - income
-  - income_na
-  - job=fixed
-  - job=freelance
-  - job=others
-  - job=partime
-  - job=unknown
-  - marital=divorced
-  - marital=married
-  - marital=separated
-  - marital=single
-  - marital=unknown
-  - marital=widow
-  - price
-  - records=no_rec
-  - records=yes_rec
-  - sav_pot_index
-  - sav_pot_index_na
-  - seniority
-  - time
+categorical_vars:
+  - home   
+  - marital     
+  - records     
+  - job         
 
 # set the train-test split
 test_size: 0.3
@@ -96,7 +56,6 @@ numerical_vars_with_na:
   - income 
   - assets 
   - debt 
-  - sav_pot_index
 
 # numerical variables to be transformed logarithimically
 numerical_log_vars:
@@ -109,31 +68,8 @@ numerical_log_vars:
 # numerical variables to be transformed via yeojohnson
 numerical_yeo_vars: 
   - seniority
-  - fin_ratio
 
 # variables not useful for our model
 dropped_vars:
   - age
-  - assets_na
-  - debt
-  - debt_na
-  - expenses
-  - home=ignore 
-  - home=other
-  - home=parents 
-  - home=priv
-  - home=rent
-  - home=unknown
-  - income_na
-  - job=freelance
-  - job=others
-  - job=unknown
-  - marital=divorced
-  - marital=unknown
-  - marital=married
-  - marital=separated
-  - marital=single
-  - marital=widow
-  - price
-  - sav_pot_index_na
   - time

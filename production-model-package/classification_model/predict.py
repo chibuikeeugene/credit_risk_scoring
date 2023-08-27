@@ -24,7 +24,7 @@ def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
             X=validated_data[config.model_config.features]
         )
         results = {
-            "predictions": [pred for pred in predictions],  # type: ignore
+            "predictions": ["good" if pred == 1 else "bad" for pred in predictions],  # type: ignore
             "version": _version,
             "errors": errors,
         }
