@@ -1,3 +1,4 @@
+import logging
 import typing as t
 from pathlib import Path
 
@@ -9,18 +10,18 @@ from sklearn.pipeline import Pipeline
 from classification_model import __version__ as _version
 from classification_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
+pd.options.mode.chained_assignment = None
 
-def load_dataset(*, file_name: str) -> pd.DataFrame:
+logger = logging.getLogger(__name__)
 
-    df = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
 
+def data_preparation(*, dataframe: pd.DataFrame) -> pd.DataFrame:
     # format the column header case
-    df.columns = df.columns.str.lower()
+    dataframe.columns = dataframe.columns.str.lower()
 
-    # update the categorical var its string values so we can know what each number represent
+    # update the categorical var with its string values
+    # so we can know what each number represent
     status_values = {1: "good", 2: "bad", 0: "unknown"}
-    df.status = df.status.map(status_values)
-
     home_values = {
         1: "rent",
         2: "owner",
@@ -30,8 +31,6 @@ def load_dataset(*, file_name: str) -> pd.DataFrame:
         6: "other",
         0: "unknown",
     }
-    df.home = df.home.map(home_values)
-
     marital_values = {
         1: "single",
         2: "married",
@@ -40,28 +39,35 @@ def load_dataset(*, file_name: str) -> pd.DataFrame:
         5: "divorced",
         0: "unknown",
     }
-    df.marital = df.marital.map(marital_values)
-
     records_values = {1: "no_rec", 2: "yes_rec"}
-    df.records = df.records.map(records_values)
-
     job_values = {1: "fixed", 2: "partime", 3: "freelance", 4: "others", 0: 'unknown"'}
-    df.job = df.job.map(job_values)
+    dataframe.status = dataframe.status.map(status_values)
+    dataframe.home = dataframe.home.map(home_values)
+    dataframe.marital = dataframe.marital.map(marital_values)
+    dataframe.records = dataframe.records.map(records_values)
+    dataframe.job = dataframe.job.map(job_values)
 
     # 99999999 represents data not available for a particular user. Hence, let's
-    # replace them with the usual NaN in numoy
+    # replace them with the usual NaN in numpy
+    for var in ["income", "assets", "debt"]:
+        dataframe[var].replace(to_replace=99999999, value=np.nan, inplace=True)
 
-    num_List = ["income", "assets", "debt"]
-    for var in num_List:
-        df[var].replace(to_replace=99999999, value=np.nan, inplace=True)
-
-    # let's exclude the unknown value in status since their present is small
-    df = df[df.status != "unknown"]
+    # let's exclude the unknown value in status since their presence is small
+    dataframe = dataframe[dataframe.status != "unknown"]
 
     # let's change the status value from string data type to int.
-    df.status = (df.status == "good").astype(int)
+    dataframe.status = (dataframe.status == "good").astype(int)
 
-    return df
+    return dataframe
+
+
+def load_dataset(*, file_name: str) -> pd.DataFrame:
+
+    df = pd.read_csv(Path(f"{DATASET_DIR}/{file_name}"))
+
+    transformed = data_preparation(dataframe=df)
+
+    return transformed
 
 
 def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:

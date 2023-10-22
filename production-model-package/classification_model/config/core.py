@@ -35,9 +35,8 @@ class ModelConfig(BaseModel):
     C: int
     numerical_vars_with_na: List[str]
     numerical_log_vars: List[str]
-    numerical_yeo_vars: List[str]
+    numerical_yeo_vars: str
     categorical_vars: List[str]
-    dropped_vars: List[str]
 
 
 class Config(BaseModel):
@@ -47,7 +46,7 @@ class Config(BaseModel):
     model_config: ModelConfig
 
 
-def find_confg_file() -> Path:
+def find_config_file() -> Path:
     """locate the configuration file"""
     if CONFIG_FILE_PATH.is_file():
         return CONFIG_FILE_PATH
@@ -57,7 +56,7 @@ def find_confg_file() -> Path:
 def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
     """parse the YAML containing the package configuration"""
     if not cfg_path:
-        cfg_path = find_confg_file()
+        cfg_path = find_config_file()
     if cfg_path:
         with open(cfg_path, "r") as conf_file:
             parsed_config = load(conf_file.read())

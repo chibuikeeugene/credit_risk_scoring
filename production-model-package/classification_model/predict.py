@@ -20,11 +20,11 @@ def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
     results = {"predictions": None, "version": _version, "errors": errors}
 
     if not errors:
-        predictions = _credit_risk_pipeline.predict(
+        prediction = _credit_risk_pipeline.predict(
             X=validated_data[config.model_config.features]
         )
         results = {
-            "predictions": ["good" if pred == 1 else "bad" for pred in predictions],  # type: ignore
+            "predictions": prediction,
             "version": _version,
             "errors": errors,
         }

@@ -8,7 +8,7 @@ from setuptools import find_packages, setup
 # Package meta-data.
 NAME = 'credit-risk-classification-model'
 DESCRIPTION = "classification model package from Train In Data."
-URL = "https://github.com/chibuikeeugene/credit_risk_scoring"
+URL = "https://github.com/chibuikeeugene/credit_risk_scoring" 
 EMAIL = "chibuikeeugene@gmail.com"
 AUTHOR = "Eugene"
 REQUIRES_PYTHON = ">=3.9.0"

@@ -10,6 +10,7 @@ def run_training() -> None:
 
     # read the training data
     data = load_dataset(file_name=config.app_config.training_data_file)
+    print(data.head())
 
     x_train, x_test, y_train, y_test = train_test_split(
         data[config.model_config.features],  # predictors

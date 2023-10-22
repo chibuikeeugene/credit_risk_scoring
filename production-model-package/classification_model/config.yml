@@ -9,8 +9,8 @@ test_data_file: test.csv
 #the variable we are attempting to predict (status)
 target: status
 
-pipeline_name: classification_model
-pipeline_save_file: classification_model_output_v
+pipeline_name: credit_classification_model
+pipeline_save_file: credit_classification_model_output_v
 
 
 # selected features 
@@ -68,8 +68,3 @@ numerical_log_vars:
 # numerical variables to be transformed via yeojohnson
 numerical_yeo_vars: 
   - seniority
-
-# variables not useful for our model
-dropped_vars:
-  - age
-  - time

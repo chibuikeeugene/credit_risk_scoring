@@ -1,7 +1,6 @@
 # import our custom transformer
 from feature_engine.encoding import OrdinalEncoder
 from feature_engine.imputation import AddMissingIndicator, MeanMedianImputer
-from feature_engine.selection import DropFeatures
 from feature_engine.transformation import LogCpTransformer, YeoJohnsonTransformer
 
 # Using our final estimator to build our model
@@ -45,11 +44,7 @@ credit_risk_pipeline = Pipeline(
                 variables=config.model_config.categorical_vars,
             ),
         ),
-        # ========== SELECTION OF FEATURES SUITABLE FOR MODEL TRAINING ======= #
-        (
-            "dropped_features",
-            DropFeatures(features_to_drop=config.model_config.dropped_vars),
-        ),
+        # ======== FEATURE SCALING ======= #
         (
             "data_scaling",
             StandardScaler(),
