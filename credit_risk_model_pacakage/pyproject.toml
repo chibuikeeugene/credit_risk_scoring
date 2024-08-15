@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "credit-risk-model-pacakage"
+version = "0.1.0"
+description = "model package for obtaining credit risk probability of customers"
+authors = ["chibuikeeugene <chibuikeeugene@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+numpy = "^2.0.1"
+scikit-learn = "^1.5.1"
+feature-engine = "^1.8.0"
+joblib = "^1.4.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
