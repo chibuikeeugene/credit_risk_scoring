@@ -12,6 +12,13 @@ numpy = "^2.0.1"
 scikit-learn = "^1.5.1"
 feature-engine = "^1.8.0"
 joblib = "^1.4.2"
+strictyaml = "^1.7.3"
+pydantic = "^2.8.2"
+pytest = "^8.3.2"
+black = "^24.8.0"
+flake8 = "^7.1.1"
+mypy = "^1.11.1"
+isort = "^5.13.2"
 
 
 [build-system]

@@ -1,13 +1,13 @@
+import os
 from pathlib import Path
 from typing import List
 
 from pydantic import BaseModel
 from strictyaml import YAML, load
 
-import classification_model
 
 # Project Directories
-PACKAGE_ROOT = Path(classification_model.__file__).resolve().parent
+PACKAGE_ROOT = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ROOT = PACKAGE_ROOT.parent
 CONFIG_FILE_PATH = PACKAGE_ROOT / "config.yml"
 DATASET_DIR = PACKAGE_ROOT / "datasets"
@@ -43,22 +43,21 @@ class Config(BaseModel):
     """master config object"""
 
     app_config: AppConfig
-    model_config: ModelConfig
+    models_config: ModelConfig
 
 
 def find_config_file() -> Path:
     """locate the configuration file"""
-    if CONFIG_FILE_PATH.is_file():
-        return CONFIG_FILE_PATH
+    if os.path.isfile(CONFIG_FILE_PATH):
+        return CONFIG_FILE_PATH 
     raise Exception(f"config not found at {CONFIG_FILE_PATH}")
 
 
 def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
     """parse the YAML containing the package configuration"""
-    if not cfg_path:
-        cfg_path = find_config_file()
     if cfg_path:
-        with open(cfg_path, "r") as conf_file:
+        cfg_path = find_config_file()
+        with open(cfg_path, "rb") as conf_file:
             parsed_config = load(conf_file.read())
             return parsed_config
     raise OSError(f"Did not find config at path: {cfg_path}")
@@ -72,10 +71,11 @@ def create_and_validate_config(parsed_config: YAML = None) -> Config:
     # specify the data attribute from the strictyaml YAML type
     _config = Config(
         app_config=AppConfig(**parsed_config.data),
-        model_config=ModelConfig(**parsed_config.data),
+        models_config=ModelConfig(**parsed_config.data),
     )
 
     return _config
 
 
 config = create_and_validate_config()
+print(config.model_config.numerical_vars_with_na)

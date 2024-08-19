@@ -1,5 +1,5 @@
 # package overview
-package_name: classification_model
+package_name: credit_risk_model
 
 # Data files
 training_data_file: train.csv
@@ -9,8 +9,8 @@ test_data_file: test.csv
 #the variable we are attempting to predict (status)
 target: status
 
-pipeline_name: credit_classification_model
-pipeline_save_file: credit_classification_model_output_v
+pipeline_name: credit_risk_model
+pipeline_save_file: credit_risk_model_output_v
 
 
 # selected features 
