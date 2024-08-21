@@ -1,0 +1,10 @@
+-r requirements.txt
+
+# testing requirements
+pytest>=6.2.3,<6.3.0
+
+# repo maintenance tooling
+black>=22.0.0,<23.0.0 # black is a code styling enforcment tool
+flake8>=3.9.0,<3.10.0 # flake8 is a python linting tool to inform us of where we aren't adhering to python conventions
+mypy==0.812 # mypy is a type checking tool
+isort==5.8.0 # isort is a tool for insuring our import are in the correct order
